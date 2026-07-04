@@ -1,0 +1,88 @@
+
+<% layout("/layouts/boilerplate") %>
+<div class="row">
+<div class="col-8 offset-2">
+<br>
+<h3>Create a New Listing</h3>
+
+<form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+
+<div class="mb-3">
+    
+<label class="form-label" for="title">Title</label>
+<input name="listing[title]"  placeholder="add a catchy title" type="text" class="form-control" required>
+<div class="valid-feedback"> Title looks good</div>
+</div>
+
+<div class="mb-3">
+<label class="form-label" for="description">Description</label>
+<textarea name="listing[description]" class="form-control" required></textarea>
+<div class="invalid-feedback"> Please enter a short description</div>
+
+</div>
+
+<!-- <div class="mb-3">
+<label class="form-label" for="image">Image Link</label>
+<input name="listing[image]" placeholder="Paste image URL (https://...)" type="text" class="form-control"  required/>
+</div> -->
+
+<!-- <div class="mb-3">
+<label class="form-label" for="image">Upload Listing Image</label>
+<input name="listing[image]"  type="file" class="form-control"  required/>
+</div> -->
+
+<div class="mb-3">
+  <label class="form-label" for="imageFile">Upload Image from System</label>
+  <input 
+    name="image" 
+    id="image" 
+    type="file" 
+    class="form-control" 
+    accept="image/*"
+    required
+>
+<div class="invalid-feedback">Please upload a valid image file</div>
+</div>
+
+<!-- <div class="mb-3">
+  <label class="form-label" for="imageUrl">OR Paste Image URL</label>
+  <input 
+    name="imageUrl" 
+    id="imageUrl" 
+    type="text" 
+    class="form-control" 
+    placeholder="https://example.com/image.jpg"
+  >
+  <div class="invalid-feedback">Please enter a valid image URL</div>
+</div> -->
+
+<div class="row">
+    <div class="mb-3 col-md-4" >
+        <label class="form-label" for="price">Price</label>
+        <input id="price" type="number" name="listing[price]"  placeholder="Enter price per night" class="form-control" required>
+        <!-- type"number -->
+        <div class="invalid-feedback"> Price should be valid</div>
+
+    </div>
+
+        <div class="mb-3 col-md-8">
+        <label class="form-label" for="country">Country</label>
+        <input name="listing[country]" placeholder="Enter country name" type="text" class="form-control" required>
+        <div class="invalid-feedback">Country name should be valid</div>
+
+        </div>
+</div>
+
+<div class="mb-3">
+<label class="form-label" for="location">Location</label>
+<input name="listing[location]" type="text" placeholder="Enter city or area" class="form-control" required>
+<div class="invalid-feedback">Location should be valid </div>
+
+</div>
+
+<button type="submit" class="btn btn-dark add-btn mt-3">Add</button>
+
+</form>
+</div>
+</div>
+

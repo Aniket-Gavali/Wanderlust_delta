@@ -1,0 +1,163 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+.star-rating {
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.star-rating .active {
+    color: gold;
+}
+</style>
+
+<div class="row mt-5">
+    <div class="col-8 offset-2">
+
+        <h3 class="mb-4">Edit Listing</h3>
+
+        <form method="POST"
+              action="/listings/<%= listing._id %>?_method=PUT"
+              enctype="multipart/form-data"
+              class="needs-validation"
+              novalidate>
+
+            <!-- TITLE -->
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input name="listing[title]"
+                       value="<%= listing.title %>"
+                       type="text"
+                       class="form-control"
+                       required>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="listing[description]"
+                          class="form-control"
+                          required><%= listing.description %></textarea>
+                <div class="invalid-feedback">Please enter description</div>
+            </div>
+
+            <!-- IMAGE PREVIEW -->
+            <div class="mb-3">
+                <label class="form-label">Current Image</label><br>
+                <img src="<%= originalImageurl %>"
+                     class="img-fluid rounded"
+                     style="max-height: 200px;">
+            </div>
+
+            <!-- NEW IMAGE -->
+            <div class="mb-3">
+                <label class="form-label">Upload New Image</label>
+                <input name="image"
+                       type="file"
+                       class="form-control">
+            </div>
+
+            <div class="row">
+
+                <!-- PRICE -->
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Price</label>
+                    <input name="listing[price]"
+                           value="<%= listing.price %>"
+                           type="number"
+                           class="form-control"
+                           required>
+                </div>
+
+                <!-- COUNTRY -->
+                <div class="col-md-8 mb-3">
+                    <label class="form-label">Country</label>
+                    <input name="listing[country]"
+                           value="<%= listing.country %>"
+                           type="text"
+                           class="form-control"
+                           required>
+                </div>
+
+            </div>
+
+            <!-- LOCATION -->
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input name="listing[location]"
+                       value="<%= listing.location %>"
+                       type="text"
+                       class="form-control"
+                       required>
+            </div>
+
+            <!-- RATING -->
+            <div class="mb-4">
+                <label class="form-label">Rating</label>
+
+                <input type="hidden"
+                       name="listing[rating]"
+                       id="ratingValue"
+                       value="<%= listing.rating || 0 %>">
+
+                <div class="star-rating">
+                    <i class="fa-regular fa-star star" data-value="1"></i>
+                    <i class="fa-regular fa-star star" data-value="2"></i>
+                    <i class="fa-regular fa-star star" data-value="3"></i>
+                    <i class="fa-regular fa-star star" data-value="4"></i>
+                    <i class="fa-regular fa-star star" data-value="5"></i>
+                </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <button class="btn btn-dark">
+                Update Listing
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+<script src="/js/script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const stars = document.querySelectorAll(".star");
+    const ratingInput = document.getElementById("ratingValue");
+
+    if (!stars.length || !ratingInput) return;
+
+    let currentRating = Number(ratingInput.value) || 0;
+
+    function updateStars(rating) {
+        stars.forEach(star => {
+            let value = Number(star.dataset.value);
+
+            if (value <= rating) {
+                star.classList.add("active");
+                star.classList.remove("fa-regular");
+                star.classList.add("fa-solid");
+            } else {
+                star.classList.remove("active");
+                star.classList.add("fa-regular");
+                star.classList.remove("fa-solid");
+            }
+        });
+    }
+
+    updateStars(currentRating);
+
+    stars.forEach(star => {
+        star.addEventListener("click", () => {
+            currentRating = Number(star.dataset.value);
+            ratingInput.value = currentRating;
+            updateStars(currentRating);
+        });
+    });
+
+});
+</script>
