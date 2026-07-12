@@ -67,13 +67,16 @@ WanderLust is a full-stack MERN web application that allows users to create, exp
 - Express.js  
 
 **Database:**
-- MongoDB  
+- MongoDB
 
 **Other Tools:**
 - Cloudinary (Image storage)  
 - Multer (File upload)  
 - Passport.js (Authentication)
 - mapbox API
+
+  **Deployment:**
+- Render
 
 ---
 
